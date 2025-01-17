@@ -29,28 +29,28 @@ pipeline {
             }
         }
 
-        stage('EKS Login') {
-                steps {
-                    script{
-                        sh """
-                            aws eks update-kubeconfig --region us-east-1 --name roboshop-${params.environment}
-                        """
-                    }
-                }
-        }
-        stage('EKS Deploy') {
-            steps {
-                script{
-                    sh """
-                        cd helm
-                        sed -i 's/IMAGE_VERSION/${params.version}/g' values.yaml
-                        helm upgrade --install catalogue -n roboshop .
-                    """
-                }
-            }
-        }
+    //     stage('EKS Login') {
+    //             steps {
+    //                 script{
+    //                     sh """
+    //                         aws eks update-kubeconfig --region us-east-1 --name roboshop-${params.environment}
+    //                     """
+    //                 }
+    //             }
+    //     }
+    //     stage('EKS Deploy') {
+    //         steps {
+    //             script{
+    //                 sh """
+    //                     cd helm
+    //                     sed -i 's/IMAGE_VERSION/${params.version}/g' values.yaml
+    //                     helm upgrade --install catalogue -n roboshop .
+    //                 """
+    //             }
+    //         }
+    //     }
         
-    }
+    // }
     // post build
     post { 
         always { 
